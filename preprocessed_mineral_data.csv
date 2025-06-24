@@ -1,0 +1,23 @@
+import pandas as pd
+from sklearn.preprocessing import OneHotEncoder
+
+# Load raw data
+data = pd.read_csv('data/sample_data.csv')
+
+# Handle missing values
+num_cols = ['magnetic_anomaly', 'REE_concentration', 'rock_density']
+for col in num_cols:
+    if col in data.columns:
+        data[col].fillna(data[col].mean(), inplace=True)
+
+# Encode categorical columns
+cat_cols = data.select_dtypes(include=['object', 'category']).columns.tolist()
+encoder = OneHotEncoder(sparse=False, drop='first')
+encoded = encoder.fit_transform(data[cat_cols])
+encoded_df = pd.DataFrame(encoded, columns=encoder.get_feature_names_out(cat_cols))
+
+# Combine
+data_final = pd.concat([data.drop(columns=cat_cols), encoded_df], axis=1)
+
+# Save
+data_final.to_csv('data/preprocessed_mineral_data.csv', index=False)

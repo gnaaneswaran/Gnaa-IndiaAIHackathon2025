@@ -1,0 +1,6 @@
+lat,lon,magnetic_anomaly,REE_concentration,rock_density,lithology
+15.5,77.2,500.3,120.5,2.8,igneous
+15.6,77.3,480.1,115.0,2.7,sedimentary
+15.7,77.4,520.2,130.0,2.9,igneous
+15.8,77.5,490.0,110.0,2.6,metamorphic
+15.9,77.6,510.4,125.0,2.85,igneous
